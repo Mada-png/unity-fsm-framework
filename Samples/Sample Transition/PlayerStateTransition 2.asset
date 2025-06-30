@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: PlayerStateTransition 2
   m_EditorClassIdentifier: 
   trigger: 0
-  fromStateDefinition: {fileID: 0}
-  nextStateDefinition: {fileID: 0}
+  fromStateDefinition: {fileID: 11400000, guid: 145279f82a9712e409e452a1024322e3, type: 2}
+  nextStateDefinition: {fileID: 11400000, guid: 010d245e39b52a644b0af494ca72dc1a, type: 2}

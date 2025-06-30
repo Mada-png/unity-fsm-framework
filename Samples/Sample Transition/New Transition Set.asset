@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 317a9f34e436f514b9cc0fa1687bbb87, type: 3}
   m_Name: New Transition Set
   m_EditorClassIdentifier: 
-  Transitions: []
+  Transitions:
+  - {fileID: 11400000, guid: 786af220499941e4ba4b0e2b27abd8a4, type: 2}
+  - {fileID: 11400000, guid: 3d4d1bd34777be84a9f8c3145cd341f7, type: 2}
+  - {fileID: 11400000, guid: 05af2408c8fecd047b9c58624d8d896d, type: 2}
