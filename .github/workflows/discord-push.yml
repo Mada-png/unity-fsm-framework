@@ -13,5 +13,5 @@ jobs:
         run: |
           curl -H "Content-Type: application/json" \
           -X POST \
-          -d "{\"content\": \"📦 **${{ github.actor }}** pushed to **${{ github.ref_name }}** — [View commit →](${{ github.event.head_commit.url }})\"}" \
-          https://discord.com/api/webhooks/1389370016469618708/cf77SRQVQO020QKp1nzEzgYu4CuUzx6pT25pOumk6-DruA_opvJCDogd0gcCMynqwyoz
+          -d "{\"content\": \"📦 ${{ github.actor }} pushed to **${{ github.ref_name }}** — [View commit →](${{ github.event.head_commit.url }})\"}" \
+          ${{ secrets.DISCORD_WEBHOOK }}
