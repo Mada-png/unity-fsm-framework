@@ -1,0 +1,16 @@
+{
+    "name": "Mada-png.FSM.Runtime",
+    "rootNamespace": "",
+    "references": [
+        "GUID:70107c169612f92439fb49cc09433751"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

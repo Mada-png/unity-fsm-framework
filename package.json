@@ -1,0 +1,19 @@
+{
+  "name": "com.mada.fsm",
+  "version": "0.2.0",
+  "displayName": "Finite State Machine Framework",
+  "description": "A reusable and modular finite state machine system for Unity projects.",
+  "unity": "6000",
+  "author": {
+    "name": "Adam Nguyen",
+    "email": "your@email.com",
+    "url": "https://github.com/Mada-png"
+  },
+  "samples": [
+    {
+      "displayName": "Basic Usage Example",
+      "description": "A minimal working example of how to use the FSM system.",
+      "path": "Samples"
+    }
+  ]
+}
