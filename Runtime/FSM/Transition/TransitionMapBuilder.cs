@@ -2,20 +2,23 @@
 using System.Linq;
 using UnityEngine;
 
-public static class TransitionMapBuilder
+namespace Mada_PNG.FSM.Runtime
 {
-    public static TransitionMap<TInput, TTrigger> Build<TInput, TTrigger, TFactory>(
-        TFactory factory,
-        TransitionSet transitionSet
-        )
+    public static class TransitionMapBuilder
     {
-        var map = new TransitionMap<TInput, TTrigger>();
-
-        foreach (var transition in transitionSet.Transitions.OfType<IStateTransition<TFactory, TInput, TTrigger>>())
+        public static TransitionMap<TInput, TTrigger> Build<TInput, TTrigger, TFactory>(
+            TFactory factory,
+            TransitionSet transitionSet
+            )
         {
-            map.Add(transition.FromStateDefinition.StateType, transition.Trigger, () => transition.NextStateDefinition.CreateState(factory));
-        }
+            var map = new TransitionMap<TInput, TTrigger>();
 
-        return map; 
+            foreach (var transition in transitionSet.Transitions.OfType<IStateTransition<TFactory, TInput, TTrigger>>())
+            {
+                map.Add(transition.FromStateDefinition.StateType, transition.Trigger, () => transition.NextStateDefinition.CreateState(factory));
+            }
+
+            return map; 
+        }
     }
-}
+}  

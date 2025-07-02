@@ -1,6 +1,9 @@
-﻿public interface IStateTransition<TFactory, TInput, TTrigger>
+﻿namespace Mada_PNG.FSM.Runtime
 {
-    TTrigger Trigger { get; }
-    IStateDefinition<TFactory, TInput> FromStateDefinition { get; }
-    IStateDefinition<TFactory, TInput> NextStateDefinition { get; }
+    public interface IStateTransition<TFactory, TInput, TTrigger>
+    {
+        TTrigger Trigger { get; }
+        IStateDefinition<TFactory, TInput> FromStateDefinition { get; }
+        IStateDefinition<TFactory, TInput> NextStateDefinition { get; }
+    }
 }

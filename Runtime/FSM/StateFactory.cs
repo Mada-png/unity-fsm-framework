@@ -1,14 +1,16 @@
-
-/// <summary>
-/// 
-/// </summary>
-/// <typeparam name="TStateMachine"></typeparam>
-public class StateFactory<TStateMachine>
+namespace Mada_PNG.FSM.Runtime
 {
-    public TStateMachine StateMachine { get; set; }
-
-    public StateFactory(TStateMachine stateMachine)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TStateMachine"></typeparam>
+    public class StateFactory<TStateMachine>
     {
-        StateMachine = stateMachine;
+        public TStateMachine StateMachine { get; set; }
+
+        public StateFactory(TStateMachine stateMachine)
+        {
+            StateMachine = stateMachine;
+        }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Mada_PNG.FSM.Runtime;
 
 [CreateAssetMenu(fileName = "PlayerStateTurnDefinition", menuName = "FSM/PlayerState/Turn")]
 public class PlayerStateTurningDefinition : PlayerStateDefinition

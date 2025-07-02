@@ -1,5 +1,7 @@
 using UnityEngine;
-
-public abstract class StateTransition : ScriptableObject
+namespace Mada_PNG.FSM.Runtime
 {
+    public abstract class StateTransition : ScriptableObject
+    {
+    }
 }

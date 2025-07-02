@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using Mada_PNG.FSM.Runtime;
 
 public class TransitionMapVisualizerWindow : EditorWindow
 {

@@ -1,4 +1,6 @@
-﻿public class PlayerStateTurn : IState<PlayerInputData>, IStateGizmos
+﻿using Mada_PNG.FSM.Runtime;
+
+public class PlayerStateTurn : IState<PlayerInputData>, IStateGizmos
 {
     public PlayerStateTurn()
     {

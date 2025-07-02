@@ -1,4 +1,6 @@
-﻿public class PlayerStateStop : IState<PlayerInputData>, IStateGizmos
+﻿using Mada_PNG.FSM.Runtime;
+
+public class PlayerStateStop : IState<PlayerInputData>, IStateGizmos
 {
     public PlayerStateStop()
     {

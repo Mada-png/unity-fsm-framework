@@ -1,7 +1,10 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "StateMachine/Transition Set")]
-public class TransitionSet : ScriptableObject
+namespace Mada_PNG.FSM.Runtime
 {
-    public StateTransition[] Transitions;
+    [CreateAssetMenu(menuName = "StateMachine/Transition Set")]
+    public class TransitionSet : ScriptableObject
+    {
+        public StateTransition[] Transitions;
+    }
 }

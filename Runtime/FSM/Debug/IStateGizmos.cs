@@ -1,4 +1,7 @@
-﻿public interface IStateGizmos
+﻿namespace Mada_PNG.FSM.Runtime
 {
-    void DrawGizmos();
+    public interface IStateGizmos
+    {
+        void DrawGizmos();
+    }
 }

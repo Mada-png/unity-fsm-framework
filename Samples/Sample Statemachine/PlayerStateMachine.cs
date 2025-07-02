@@ -1,3 +1,5 @@
+using Mada_PNG.FSM.Runtime;
+
 public class PlayerStateMachine : StateMachine<PlayerInputData, PlayerTrigger>
 {
     private PlayerStateFactory _stateFactory;
