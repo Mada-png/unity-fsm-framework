@@ -15,7 +15,3 @@ public abstract class StateTransitionField<TFactory, TInput, TTrigger> : StateTr
 
     public IStateDefinition<TFactory, TInput> NextStateDefinition => nextStateDefinition;
 }
-
-public abstract class StateTransition : ScriptableObject
-{
-}
