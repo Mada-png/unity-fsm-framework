@@ -1,0 +1,49 @@
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+
+# Never ignore .gitkeep, .gitignore or .gitattributes
+!*.gitkeep
+!*.gitignore
+!*.gitattributes
+
+# Avoid ignoring DLLs and asset files that are necessary
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+
+# Rider
+.idea/
+*.sln.iml
+
+# Visual Studio Code
+.vscode/
+.vscode/*
+
+# Builds
+*.apk
+*.aab
+*.unitypackage
+
+# Auto-generated
+sysinfo.txt
+
+# Dev-only folders
+DevSamples/
