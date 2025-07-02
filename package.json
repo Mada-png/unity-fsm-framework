@@ -4,6 +4,7 @@
   "displayName": "Finite State Machine Framework",
   "description": "A reusable and modular finite state machine system for Unity projects.",
   "unity": "2023.3",
+  "type": "tool",
   "author": {
     "name": "Adam Nguyen",
     "email": "adam.nguyen015@gmail.com",
