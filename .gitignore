@@ -47,3 +47,4 @@ sysinfo.txt
 
 # Dev-only folders
 DevSamples/
+*DevSamples.meta
