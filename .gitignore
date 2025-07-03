@@ -48,3 +48,6 @@ sysinfo.txt
 # Dev-only folders
 DevSamples/
 *DevSamples.meta
+
+DevSamples/*.asmdef
+DevSamples/*.asmdef.meta
