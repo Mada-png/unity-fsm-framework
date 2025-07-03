@@ -49,5 +49,5 @@ sysinfo.txt
 DevSamples/
 *DevSamples.meta
 
-DevSamples/*.asmdef
-DevSamples/*.asmdef.meta
+Samples/*.asmdef
+Samples/*.asmdef.meta
