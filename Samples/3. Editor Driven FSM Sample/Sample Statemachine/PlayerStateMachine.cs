@@ -1,6 +1,6 @@
 using Mada_PNG.FSM.Runtime;
 
-public class PlayerStateMachine : StateMachine<PlayerInputData, PlayerTrigger>
+public class PlayerStateMachine : EnumTriggerStateMachine<PlayerInputData, PlayerTrigger>
 {
     private PlayerStateFactory _stateFactory;
 

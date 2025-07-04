@@ -1,6 +1,6 @@
 namespace Mada_PNG.FSM.Runtime
 {
-    public interface IState<TInput>
+    public interface IState
     {
         /// <summary>
         /// Enter logic, runs only once
@@ -18,6 +18,10 @@ namespace Mada_PNG.FSM.Runtime
         /// Exit logic, runs only once
         /// </summary>
         void ExitState();
-        void HandleInput(TInput input);
+    }
+
+    public interface IState<TContext> : IState
+    {
+        void HandleContext(TContext context);
     }
 }
