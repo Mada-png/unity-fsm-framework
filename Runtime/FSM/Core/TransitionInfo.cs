@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 
 namespace Mada_PNG.FSM.Runtime
@@ -8,11 +9,34 @@ namespace Mada_PNG.FSM.Runtime
         public Type ToState { get; }
         public Func<bool> Condition { get; }
 
-        public TransitionInfo(Type fromState, Type toState, Func<bool> condition)
+        public object[]? FromArgs { get; }
+        public object[]? ToArgs { get; }
+
+        public TransitionInfo(Type fromState, Type toState, Func<bool> condition, object[]? fromArgs = null, object[]? toArgs = null)
         {
             FromState = fromState;
             ToState = toState;
             Condition = condition;
+            FromArgs = fromArgs;
+            ToArgs = toArgs;
+        }
+    }
+
+    public class TransitionInfo<TContext>
+    {
+        public IState<TContext> FromState { get; }
+        public IState<TContext> ToState { get; }
+        public Func<bool> Condition { get; }
+        public object[]? FromArgs { get; }
+        public object[]? ToArgs { get; }
+
+        public TransitionInfo(IState<TContext> fromState, IState<TContext> toState, Func<bool> condition, object[]? fromArgs = null, object[]? toArgs = null)
+        {
+            FromState = fromState;
+            ToState = toState;
+            Condition = condition;
+            FromArgs = fromArgs;
+            ToArgs = toArgs;
         }
     }
 }
