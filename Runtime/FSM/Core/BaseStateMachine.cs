@@ -91,6 +91,141 @@ namespace Mada_PNG.FSM.Runtime
         }
     }
 
+    public abstract class BaseStateMachine<TState, TContext> : IStateMachine where TState : IState<TContext>
+    {
+        protected Stack<TState> _stateStack = new();
+        protected TState _initializedState;
+        protected List<TransitionInfo<TContext>> _transitionInfo = new();
+
+        public TState CurrentState => _stateStack.Peek();
+
+        public virtual void Tick()
+        {
+            _stateStack.Peek()?.Tick();
+        }
+
+        public virtual void FixedTick()
+        {
+            _stateStack.Peek()?.FixedTick();
+        }
+
+        public virtual void PopState()
+        {
+            var popped = _stateStack.Pop();
+            popped.ExitState();
+
+            if (_stateStack.Count == 0)
+                _stateStack.Push(_initializedState);
+
+            _stateStack.Peek()?.EnterState();
+        }
+
+        public virtual bool TryPeek<T>(Stack<T> stack, out T result)
+        {
+            if (stack.Count > 0)
+            {
+                result = stack.Peek();
+                return true;
+            }
+
+            result = default;
+            return false;
+        }
+
+        public virtual void DebugPrintStack()
+        {
+            foreach (IState state in _stateStack)
+            {
+                Debug.Log(state.GetType().Name);
+            }
+        }
+
+        public virtual void DrawGizmos()
+        {
+            foreach (IState state in _stateStack)
+            {
+                if (state is IStateGizmos gizmoState)
+                {
+                    gizmoState.DrawGizmos();
+                }
+            }
+        }
+
+        public virtual void PushState(IState newState, bool exitPreviousState = true, bool removePreviousState = false)
+        {
+            if (newState == null)
+            {
+                throw new ArgumentNullException(nameof(newState), "New state cannot be null");
+            }
+
+            if (exitPreviousState)
+            {
+                TryPeek(_stateStack, out TState topItem);
+                topItem?.ExitState();
+            }
+
+            if (removePreviousState)
+            {
+                _stateStack.Pop();
+            }
+
+            _stateStack.Push((TState)newState);
+            newState.EnterState();
+        }
+    }
+
+    public class StateMachine : BaseStateMachine<IState>
+    {
+        public StateMachine(List<TransitionInfo> transitionInfo)
+        {
+            if (transitionInfo == null || transitionInfo.Count == 0)
+            {
+                throw new ArgumentNullException(nameof(transitionInfo), "Transition info cannot be null or empty");
+            }
+            _transitionInfo = transitionInfo;
+            _initializedState = (IState)transitionInfo[0].FromState;
+            _stateStack.Push(_initializedState);
+        }
+        public StateMachine(List<TransitionInfo> transitionInfo, int initialTransition)
+        {
+            if (transitionInfo == null || transitionInfo.Count == 0)
+            {
+                throw new ArgumentNullException(nameof(transitionInfo), "Transition info cannot be null or empty");
+            }
+            _transitionInfo = transitionInfo;
+            _initializedState = (IState)transitionInfo[initialTransition].FromState;
+            _stateStack.Push(_initializedState);
+        }
+    }
+
+    public class  StateMachine<TContext> : BaseStateMachine<IState<TContext>, TContext>
+    {
+        public StateMachine(List<TransitionInfo<TContext>> transitionInfo)
+        {
+            if (transitionInfo == null || transitionInfo.Count == 0)
+            {
+                throw new ArgumentNullException(nameof(transitionInfo), "Transition info cannot be null or empty");
+            }
+            _transitionInfo = transitionInfo;
+            _initializedState = transitionInfo[0].FromState;
+            _stateStack.Push(_initializedState);
+        }
+
+        public StateMachine(List<TransitionInfo<TContext>> transitionInfo, int initialTransition)
+        {
+            if (transitionInfo == null || transitionInfo.Count == 0)
+            {
+                throw new ArgumentNullException(nameof(transitionInfo), "Transition info cannot be null or empty");
+            }
+            _transitionInfo = transitionInfo;
+            _initializedState = transitionInfo[initialTransition].FromState;
+            _stateStack.Push(_initializedState);
+        }
+    }
+
+
+
+
     //public class BaseStateMachine<TContext> : BaseStateMachine
     //{
     //    public new IState<TContext> CurrentState => _stateStack.Peek();
