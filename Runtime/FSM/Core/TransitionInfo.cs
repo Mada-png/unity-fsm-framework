@@ -5,14 +5,14 @@ namespace Mada_PNG.FSM.Runtime
 {
     public class TransitionInfo
     {
-        public Type FromState { get; }
-        public Type ToState { get; }
+        public IState FromState { get; }
+        public IState ToState { get; }
         public Func<bool> Condition { get; }
 
         public object[]? FromArgs { get; }
         public object[]? ToArgs { get; }
 
-        public TransitionInfo(Type fromState, Type toState, Func<bool> condition, object[]? fromArgs = null, object[]? toArgs = null)
+        public TransitionInfo(IState fromState, IState toState, Func<bool> condition, object[]? fromArgs = null, object[]? toArgs = null)
         {
             FromState = fromState;
             ToState = toState;
