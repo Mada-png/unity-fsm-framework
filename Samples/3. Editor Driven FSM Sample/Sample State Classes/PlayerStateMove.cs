@@ -22,7 +22,7 @@ public class PlayerStateMove : IState<PlayerInputData>, IStateGizmos
     {
     }
 
-    public void HandleInput(PlayerInputData input)
+    public void HandleContext(PlayerInputData input)
     {
     }
 
