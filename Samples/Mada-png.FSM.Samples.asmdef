@@ -1,0 +1,16 @@
+{
+    "name": "Mada-png.FSM.Samples",
+    "rootNamespace": "",
+    "references": [
+        "GUID:35dfad9e8f0fe90448de0ebda9f22e39"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

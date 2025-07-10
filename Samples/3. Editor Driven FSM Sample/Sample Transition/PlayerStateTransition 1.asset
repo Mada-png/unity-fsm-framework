@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e7263ebb11af7443a86568b85c94499, type: 3}
+  m_Name: PlayerStateTransition 1
+  m_EditorClassIdentifier: 
+  trigger: 0
+  fromStateDefinition: {fileID: 11400000, guid: 010d245e39b52a644b0af494ca72dc1a, type: 2}
+  nextStateDefinition: {fileID: 11400000, guid: 145279f82a9712e409e452a1024322e3, type: 2}
