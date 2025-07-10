@@ -20,25 +20,40 @@ namespace Mada_PNG.FSM.Runtime
         protected Stack<TState> _stateStack = new();
         protected TState _initializedState;
         public TState CurrentState => _stateStack.Peek();
+        protected TState _currentState;
 
-        private readonly List<TransitionInfo> _transitionInfo = new();
+        protected List<TransitionInfo> _transitionInfo = new();
 
-        protected StateMachineCore(IEnumerable<TransitionInfo> transition, int initial = 0)
+        protected StateMachineCore()
+        {
+        }
+
+        protected StateMachineCore(IEnumerable<TransitionInfo> transition)
         {
             var list = transition.ToList();
             _transitionInfo = list;
-            _initializedState = (TState)list[initial].FromState;
+        }
+
+        public void InitializeStateMachine(TState initialState)
+        {
+            _initializedState = initialState;
+            PushState(_initializedState, false, false);
+        }
+
+        public virtual void InitializeStateMachine(int index)
+        {
+            _initializedState = (TState)_transitionInfo[index].FromState;
             PushState(_initializedState, false, false);
         }
 
         public void Tick()
         {
-            CurrentState?.Tick();
+            CurrentStateStack().Tick();
         }
 
         public void FixedTick()
         {
-            CurrentState.FixedTick();
+            CurrentStateStack().FixedTick();
         }
 
         /// <summary>
@@ -96,19 +111,17 @@ namespace Mada_PNG.FSM.Runtime
             return false;
         }
 
-        //protected bool TryPeek(out TState result)
-        //{
-        //    if (_stateStack.Count > 0)
-        //    {
-        //        result = _stateStack.Peek();
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        result = default;
-        //        return false;
-        //    }
-        //}
+        public TState CurrentStateStack()
+        {
+            if (_stateStack.Count > 0)
+            {
+                return _stateStack.Peek();
+            }
+            else
+            {
+                throw new InvalidOperationException("State stack is empty. Did you forget to initialize the State Machine with InitializeStateMachine()?");
+            }
+        }
 
         /// <summary>
         /// Prints the names of the types of all states currently in the stack to the debug log.
@@ -150,14 +163,35 @@ namespace Mada_PNG.FSM.Runtime
     public abstract class StateMachineCore<TState, TContext> : StateMachineCore<TState>, IStateMachine<TContext>
         where TState : IState<TContext>
     {
-        protected StateMachineCore(IEnumerable<TransitionInfo<TContext>> transition, int initial = 0)
-            : base(transition.Select(t => new TransitionInfo((IState)t.FromState, (IState)t.ToState, () => t.Condition())), initial)
+        private readonly List<TransitionInfo<TContext>> _typedTransitions;
+
+        protected StateMachineCore(IEnumerable<TransitionInfo<TContext>> transition)
         {
+            _typedTransitions = transition.ToList();
         }
 
-        public virtual void HandleContext(TContext context)
+        public override void InitializeStateMachine(int index)
         {
-            CurrentState?.HandleContext(context);
+            _initializedState = (TState)_typedTransitions[index].FromState;
+            PushState(_initializedState, false, false);
+        }
+
+        public void HandleContext(TContext context)
+        {
+            CurrentStateStack()?.HandleContext(context);
+            HandleConditionalContext(context);
+        }
+
+        public void HandleConditionalContext(TContext context)
+        {
+            foreach (TransitionInfo<TContext> transition in _typedTransitions)
+            {
+                if (transition.FromState.GetType() == CurrentState.GetType() && transition.Condition(context))
+                {
+                    PushState((TState)transition.ToState, true, false);
+                    return;
+                }
+            }
         }
 
         void IStateMachine<TContext>.PushState(IState<TContext> newState, bool exitPreviousState, bool remove)
@@ -166,25 +200,22 @@ namespace Mada_PNG.FSM.Runtime
 
     public class StateMachine : StateMachineCore<IState>
     {
-        protected List<TransitionInfo> _transitionInfo = new();
-
-        public StateMachine(IEnumerable<TransitionInfo> transition, int initial = 0) : base(transition, initial)
+        public StateMachine(IEnumerable<TransitionInfo> transition) : base(transition)
         {
         }
     }
 
     public class StateMachine<TContext> : StateMachineCore<IState<TContext>, TContext>
     {
-        protected List<TransitionInfo<TContext>> _transitionInfo = new();
-
-        public StateMachine(IEnumerable<TransitionInfo<TContext>> transition, int initial = 0) : base(transition, initial)
+        public StateMachine(IEnumerable<TransitionInfo<TContext>> transition, TContext context) : base(transition)
         {
+            _transitionInfo = transition.Select(t => new TransitionInfo((IState)t.FromState, (IState)t.ToState, () => t.Condition(context))).ToList();
         }
     }
 
     public abstract class EnumTriggerStateMachine<TContext, TTrigger> : StateMachineCore<IState<TContext>, TContext>
     {
-        protected EnumTriggerStateMachine(IEnumerable<TransitionInfo<TContext>> transition, int initial = 0) : base(transition, initial)
+        protected EnumTriggerStateMachine(IEnumerable<TransitionInfo<TContext>> transition, int initial = 0) : base(transition)
         {
         }
     }

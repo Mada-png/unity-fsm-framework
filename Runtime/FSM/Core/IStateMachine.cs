@@ -72,5 +72,6 @@ namespace Mada_PNG.FSM.Runtime
     {
         void PushState(IState<TContext> newState, bool exitPreviousState = true, bool removePreviousState = false);
         void HandleContext(TContext context);
+        void HandleConditionalContext(TContext context);
     }
 }

@@ -7,17 +7,18 @@ public class PlayerFSM : MonoBehaviour
 {
     private StateMachine<PlayerInputData> _stateMachine;
     private PlayerInputData _inputData;
-    //private List<TransitionInfo<PlayerInputData>> _transitionInfo;
+
     void Start()
     {
         var transitionInfo = new[]
         {
-            new TransitionInfo<PlayerInputData>(new ExampleState(), new  ExampleState2(), () => _inputData.IsRunning),
-            new TransitionInfo<PlayerInputData>(new ExampleState2(), new ExampleState(), () => !_inputData.IsRunning),
-            new TransitionInfo<PlayerInputData>(new ExampleState2(), new ExampleState3(), () => _inputData.IsJumping)
+            TransitionInfo<PlayerInputData>.From<ExampleState, ExampleState2>(_inputData => _inputData.IsRunning),
+            TransitionInfo<PlayerInputData>.From<ExampleState2, ExampleState>(_inputData => !_inputData.IsRunning),
+            TransitionInfo<PlayerInputData>.From<ExampleState2, ExampleState3>(_inputData => _inputData.IsJumping),
         };
 
-        _stateMachine = new StateMachine<PlayerInputData>(transitionInfo.ToList());
+        _stateMachine = new StateMachine<PlayerInputData>(transitionInfo.ToList(), _inputData);
+        _stateMachine.InitializeStateMachine(new ExampleState());
     }
 
     void Update()
@@ -31,9 +32,6 @@ public class PlayerFSM : MonoBehaviour
             IsJumping = Input.GetKeyDown(KeyCode.Space)
         };
 
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            Debug.Log("Button");
-        }
+        _stateMachine.HandleContext(_inputData);
     }
 }
