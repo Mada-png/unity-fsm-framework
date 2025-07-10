@@ -9,6 +9,6 @@ public class PlayerStateStopDefinition : PlayerStateDefinition
 
     public override IState<PlayerInputData> CreateState(PlayerStateFactory factory)
     {
-        throw new NotImplementedException();
+        return factory.StopState();
     }
 }
