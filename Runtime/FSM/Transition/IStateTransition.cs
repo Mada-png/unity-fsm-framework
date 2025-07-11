@@ -1,4 +1,4 @@
-﻿namespace Mada_PNG.FSM.Runtime
+namespace Mada_PNG.FSM.Runtime
 {
     public interface IStateTransition<TFactory, TInput, TTrigger>
     {
