@@ -2,9 +2,19 @@ using System;
 using UnityEngine;
 using Mada_PNG.FSM.Runtime;
 
-public class ExampleState2 : IState<PlayerInputData>
+public class ExampleStateRed : IState<PlayerInputData>
 {
-    public void EnterState() { Debug.Log("Start running"); }
+    private SpriteRenderer _spriteRenderer;
+    public ExampleStateRed(SpriteRenderer spriteRenderer)
+    {
+        _spriteRenderer = spriteRenderer;
+    }
+
+    public void EnterState() 
+    { 
+        _spriteRenderer.color = Color.red;
+    }
+
     public void Tick() { Debug.Log("Running"); }
     public void FixedTick() { Debug.Log("Fixed Ticking Example State"); }
     public void ExitState() { Debug.Log("Stop running"); }
