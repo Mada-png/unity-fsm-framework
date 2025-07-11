@@ -51,3 +51,6 @@ DevSamples/
 
 Samples/*.asmdef
 Samples/*.asmdef.meta
+
+# Development scripts
+check_newlines.py
