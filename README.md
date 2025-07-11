@@ -5,15 +5,15 @@ Designed to be reusable across projects, extendable, and editor-friendly.
 
 ---
 
-## ✨ Features
+## Features
 
-- 🔁 Reusable `StateMachine`, `State`, and `Transition` architecture
-- 🎯 ScriptableObject-driven transition definitions
-- 🧱 Plug-and-play FSM setup for any MonoBehaviour
-- 🛠️ Editor support with visual transition mapping (optional)
-- 🧪 Includes samples for quick onboarding
+- Reusable `StateMachine`, `State`, and `Transition` architecture
+- ScriptableObject-driven transition definitions
+- Plug-and-play FSM setup for any MonoBehaviour
+- Editor support with visual transition mapping (optional)
+- Includes samples for quick onboarding
 
-## 📚 Samples
+## Samples
 
 This package ships with three tiers of examples located in the `Samples` folder:
 
@@ -21,7 +21,7 @@ This package ships with three tiers of examples located in the `Samples` folder:
 2. **Conditional FSM Sample** – introduces context–aware transitions and conditional logic.
 3. **Editor Driven FSM Sample** – builds a state machine from ScriptableObject definitions and visual tools.
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Creating a simple FSM
 
