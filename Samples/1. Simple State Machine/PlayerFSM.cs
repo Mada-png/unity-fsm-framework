@@ -20,7 +20,7 @@ public class PlayerFSM : MonoBehaviour
             new TransitionInfo<PlayerInputData>(stateGreen, stateBlue, _inputData => _inputData.IsKeyB),
 
             new TransitionInfo<PlayerInputData>(stateRed, stateBlue, _inputData => _inputData.IsKeyB),
-            new TransitionInfo<PlayerInputData>(stateRed, stateGreen, _inputData => _inputData.IsKeyG),
+            new TransitionInfo<PlayerInputData>(stateRed, stateGreen, _inputData => _inputData.IsKeyG, toArgs: new object[] { this.gameObject }),
 
             new TransitionInfo<PlayerInputData>(stateBlue, stateGreen, _inputData => _inputData.IsKeyG),
             new TransitionInfo<PlayerInputData>(stateBlue, stateRed, _inputData => _inputData.IsKeyR),

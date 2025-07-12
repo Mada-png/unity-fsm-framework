@@ -6,14 +6,17 @@ namespace Mada_PNG.FSM.Runtime
         /// Enter logic, runs only once
         /// </summary>
         void EnterState();
+
         /// <summary>
         /// FPS Updates
         /// </summary>
         void Tick();
+
         /// <summary>
         /// Physics Updates
         /// </summary>
         void FixedTick();
+
         /// <summary>
         /// Exit logic, runs only once
         /// </summary>
@@ -23,5 +26,10 @@ namespace Mada_PNG.FSM.Runtime
     public interface IState<TContext> : IState
     {
         void HandleContext(TContext context);
+    }
+
+    public interface IStateWithArgs
+    {
+        void SetToArgs(object[] args);
     }
 }
