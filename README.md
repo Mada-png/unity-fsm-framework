@@ -33,14 +33,14 @@ var stateBlue = new ExampleStateBlue(SpriteRenderer);
 
 var transitionInfo = new[]
 {
-    new TransitionInfo<PlayerInputData>(stateGreen, stateRed, _inputData => _inputData.IsKeyR),
-    new TransitionInfo<PlayerInputData>(stateGreen, stateBlue, _inputData => _inputData.IsKeyB),
+    new TransitionInfo<PlayerInputData>(stateGreen, stateRed, input => input.IsKeyR),
+    new TransitionInfo<PlayerInputData>(stateGreen, stateBlue, input => input.IsKeyB),
 
-    new TransitionInfo<PlayerInputData>(stateRed, stateBlue, _inputData => _inputData.IsKeyB),
-    new TransitionInfo<PlayerInputData>(stateRed, stateGreen, _inputData => _inputData.IsKeyG, toArgs: new object[] { this.gameObject }),
+    new TransitionInfo<PlayerInputData>(stateRed, stateBlue, input => input.IsKeyB),
+    new TransitionInfo<PlayerInputData>(stateRed, stateGreen, input => input.IsKeyG, toArgs: new object[] { this.gameObject }),
 
-    new TransitionInfo<PlayerInputData>(stateBlue, stateGreen, _inputData => _inputData.IsKeyG),
-    new TransitionInfo<PlayerInputData>(stateBlue, stateRed, _inputData => _inputData.IsKeyR),
+    new TransitionInfo<PlayerInputData>(stateBlue, stateGreen, input => input.IsKeyG),
+    new TransitionInfo<PlayerInputData>(stateBlue, stateRed, input => input.IsKeyR),
 };
 
 _stateMachine = new StateMachine<PlayerInputData>(transitionInfo.ToList(), _inputData);
