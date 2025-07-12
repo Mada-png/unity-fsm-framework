@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace Mada_PNG.FSM.Runtime
 {
     public interface IStateMachine
@@ -68,10 +66,13 @@ namespace Mada_PNG.FSM.Runtime
         /// development.</remarks>
         void DrawGizmos();
     }
+
     public interface IStateMachine<TContext> : IStateMachine
     {
         void PushState(IState<TContext> newState, bool exitPreviousState = true, bool removePreviousState = false);
+
         void HandleContext(TContext context);
+
         void HandleConditionalContext(TContext context);
     }
 }
