@@ -1,7 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 namespace Mada_PNG.FSM.Runtime
@@ -57,7 +57,7 @@ namespace Mada_PNG.FSM.Runtime
         }
 
         /// <summary>
-        /// Add a new state to the top of the stack 
+        /// Add a new state to the top of the stack
         /// </summary>
         /// <param name="newState">New state to be pushed up</param>
         public void PushState(TState newState, bool exitPreviousState = true, bool removePreviousState = false)
@@ -188,10 +188,29 @@ namespace Mada_PNG.FSM.Runtime
             {
                 if (transition.FromState.GetType() == CurrentState.GetType() && transition.Condition(context))
                 {
+                    SetToArgs(transition);
+
                     PushState((TState)transition.ToState, true, false);
                     return;
                 }
             }
+        }
+
+        private void SetToArgs(TransitionInfo<TContext> transitionTo)
+        {
+            if (transitionTo.ToState is not IStateWithArgs stateWithArgs)
+            {
+                Debug.LogWarning("Transition to state is null or transitionState does not have IStateWithArgs");
+                return;
+            }
+
+            if (transitionTo.ToArgs == null || transitionTo.ToArgs.Length == 0)
+            {
+                Debug.LogWarning("Transition to state does not have ToArgs");
+                return;
+            }
+
+            stateWithArgs.SetToArgs(transitionTo.ToArgs);
         }
 
         void IStateMachine<TContext>.PushState(IState<TContext> newState, bool exitPreviousState, bool remove)

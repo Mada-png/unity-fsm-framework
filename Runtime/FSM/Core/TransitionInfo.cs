@@ -1,4 +1,5 @@
 #nullable enable
+
 using System;
 
 namespace Mada_PNG.FSM.Runtime
