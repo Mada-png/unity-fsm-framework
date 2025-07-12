@@ -16,10 +16,8 @@ Designed to be reusable across projects, extendable, and editor-friendly.
 ## Samples
 
 This package ships with three tiers of examples located in the `Samples` folder:
-
-1. **Simple State Machine** – a minimal, code-driven FSM that demonstrates the core API.
-2. **Conditional FSM Sample** – introduces context–aware transitions and conditional logic.
-3. **Editor Driven FSM Sample** – builds a state machine from ScriptableObject definitions and visual tools.
+1. **Conditional FSM Sample** – introduces context–aware transitions and conditional logic.
+2. **Editor Driven FSM Sample** – builds a state machine from ScriptableObject definitions and visual tools.
 
 ## Getting Started
 
@@ -29,15 +27,24 @@ The Tier&nbsp;1 sample shows the bare‑bones approach. Define your states by im
 
 ```csharp
 // Example taken from the Tier 1 sample
-var transitions = new[]
+var stateGreen = new ExampleStateGreen(SpriteRenderer);
+var stateRed = new ExampleStateRed(SpriteRenderer);
+var stateBlue = new ExampleStateBlue(SpriteRenderer);
+
+var transitionInfo = new[]
 {
-    TransitionInfo<PlayerInputData>.From<ExampleState, ExampleState2>(input => input.IsRunning),
-    TransitionInfo<PlayerInputData>.From<ExampleState2, ExampleState>(input => !input.IsRunning),
-    TransitionInfo<PlayerInputData>.From<ExampleState2, ExampleState3>(input => input.IsJumping),
+    new TransitionInfo<PlayerInputData>(stateGreen, stateRed, _inputData => _inputData.IsKeyR),
+    new TransitionInfo<PlayerInputData>(stateGreen, stateBlue, _inputData => _inputData.IsKeyB),
+
+    new TransitionInfo<PlayerInputData>(stateRed, stateBlue, _inputData => _inputData.IsKeyB),
+    new TransitionInfo<PlayerInputData>(stateRed, stateGreen, _inputData => _inputData.IsKeyG, toArgs: new object[] { this.gameObject }),
+
+    new TransitionInfo<PlayerInputData>(stateBlue, stateGreen, _inputData => _inputData.IsKeyG),
+    new TransitionInfo<PlayerInputData>(stateBlue, stateRed, _inputData => _inputData.IsKeyR),
 };
 
-var fsm = new StateMachine<PlayerInputData>(transitions.ToList(), new PlayerInputData());
-fsm.InitializeStateMachine(new ExampleState());
+_stateMachine = new StateMachine<PlayerInputData>(transitionInfo.ToList(), _inputData);
+_stateMachine.InitializeStateMachine(stateGreen);
 
 void Update()
 {
