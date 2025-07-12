@@ -149,6 +149,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+  SpriteRenderer: {fileID: 667857829}
+>>>>>>> Stashed changes
 =======
   SpriteRenderer: {fileID: 667857829}
 >>>>>>> Stashed changes
