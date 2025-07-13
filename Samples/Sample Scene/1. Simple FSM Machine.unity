@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpriteRenderer: {fileID: 667857829}
+  RedStateConfig: {fileID: 11400000, guid: dca8eb3675aad6b47916d53dd1489739, type: 2}
 --- !u!4 &667857828
 Transform:
   m_ObjectHideFlags: 0
