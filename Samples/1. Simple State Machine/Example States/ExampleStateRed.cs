@@ -5,14 +5,17 @@ using Mada_PNG.FSM.Runtime;
 public class ExampleStateRed : IState<PlayerInputData>
 {
     private SpriteRenderer _spriteRenderer;
-    public ExampleStateRed(SpriteRenderer spriteRenderer)
+    private RedStateConfig _config;
+
+    public ExampleStateRed(RedStateConfig config, SpriteRenderer spriteRenderer)
     {
         _spriteRenderer = spriteRenderer;
+        _config = config;
     }
 
     public void EnterState() 
     { 
-        _spriteRenderer.color = Color.red;
+        _spriteRenderer.color = _config.Color;
     }
 
     public void Tick() { Debug.Log("Running"); }
